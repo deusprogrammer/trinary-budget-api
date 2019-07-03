@@ -9,11 +9,11 @@ import userRoutes from './api/routes/userRoutes'
 import {loginStrategy, jwtAuthStrategy} from './api/config/passportConfig'
 
 let app = express()
-let port = process.env.PORT || 8085
+let port = process.env.PORT || 8080
 
 // Mongoose instance connection url connection
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost:27017/mpm-db?retryWrites=true')
+mongoose.connect('mongodb://localhost:27017/budget-db?retryWrites=true')
 
 passport.use('login', loginStrategy)
 passport.use(jwtAuthStrategy)
