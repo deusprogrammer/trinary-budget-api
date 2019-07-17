@@ -50,6 +50,8 @@ export default {
                 return
             }
 
+            console.log("OWNER: " + result.owner + " === " + JSON.stringify(req.user._id))
+
             if (result.owner !== req.user._id) {
                 res.sendStatus(403)
                 return
@@ -60,24 +62,26 @@ export default {
     },
     updateBudget: (req, res) => {
         console.log("UPDATE BUDGET " + req.params.id)
-        Budgets.find({_id: req.params.id}, req.body, {new: true}, (error, result) => {
+        Budgets.findById(req.params.id, (error, result) => {
             if (error) {
                 res.send(error)
                 return
             }
+
+            console.log("OWNER: " + result.owner + " === " + JSON.stringify(req.user._id))
 
             if (result.owner !== req.user._id) {
                 res.sendStatus(403)
                 return
             }
 
-            result.save((error, saved) => {
-                if (error) {
+            Budgets.update({_id: req.params.id}, req.body, (uError, uResult) => {
+                if (uError) {
                     res.send(error)
                     return
                 }
 
-                res.json(saved)
+                res.json(req.body)
             })
         })
     }
