@@ -12,8 +12,9 @@ let app = express()
 let port = process.env.PORT || 8080
 
 // Mongoose instance connection url connection
+var databaseUrl = process.env.DB_URL
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost:27017/budget-db?retryWrites=true')
+mongoose.connect(databaseUrl)
 
 passport.use('login', loginStrategy)
 passport.use(jwtAuthStrategy)
