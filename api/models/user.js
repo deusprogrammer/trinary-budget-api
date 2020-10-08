@@ -4,11 +4,28 @@ import bcrypt from 'bcrypt'
 let userSchema = mongoose.Schema({
     username: {
         type: String,
-        required: "Username is required"
+        required: "Username is required",
+        unique: true
     },
     password: {
         type: String,
         required: "Password is required"
+    },
+    roles: {
+        type: Array,
+        of: String
+    },
+    connected: {
+        twitch: {
+            name: {
+                type: String,
+                unique: true
+            },
+            userId: {
+                type: String,
+                unique: true
+            }
+        }
     }
 })
 

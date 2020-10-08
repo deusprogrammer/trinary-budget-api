@@ -32,9 +32,11 @@ export let jwtAuthStrategy = new jwtStrategy({
     secretOrKey: authConfig.key,
     jwtFromRequest: extractJwt.fromAuthHeaderAsBearerToken()
 }, async (token, done) => {
+    console.warn("TARGET: " + JSON.stringify(token));
     try {
         return done(null, token.user)
     } catch (error) {
-        done(error)
+        console.error(error);
+        return done(error)
     }
 })

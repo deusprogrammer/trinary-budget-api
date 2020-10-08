@@ -1,3 +1,5 @@
+console.warn("KEY: " + process.env.JWT_SIGNING_KEY)
+
 export default {
-    key: "thisisatest"
+    key: process.env.JWT_SIGNING_KEY
 }
